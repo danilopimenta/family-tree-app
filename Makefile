@@ -27,3 +27,9 @@ fmt:
 goimports:
 	$(GOCMD) install golang.org/x/tools/cmd/goimports@latest
 	goimports -local github.com/danilopimenta/family-tree-app -w .
+
+run:
+	docker-compose up -d
+
+docker-test:
+	docker-compose -f docker-compose.test.yml up --build --abort-on-container-exit
