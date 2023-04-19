@@ -14,6 +14,7 @@ type HTTPHandler struct {
 	ctx           context.Context
 }
 
+// NewHTTPHandler creates a new HTTPHandler
 func NewHTTPHandler(ctx context.Context, ps person.Service) *HTTPHandler {
 	return &HTTPHandler{
 		personService: ps,
@@ -22,10 +23,23 @@ func NewHTTPHandler(ctx context.Context, ps person.Service) *HTTPHandler {
 }
 
 // Get returns a member and its ancestors
+// @title Family Tree API
+// @description List all ancestors of a family member
+// @version 1.0.0
+// @BasePath /
+// @schemes http
+// @host localhost:8080
+// @name Family Tree API
+// @produces application/json
+// @consumes application/json
+// @Router /pearson/{name} [get]
+// @Param name path string true "Name of the person like 'Bruce'"
+// @Success 200 {object} domain.Family "Family member and its ancestors"
+// @Failure 404 {object} domain.PersonNotFound
 func (h *HTTPHandler) Get(c *gin.Context) {
 	members, err := h.personService.GetMemberAncestor(h.ctx, c.Param("name"))
 	if err != nil {
-		if err == domain.ErrUnknown {
+		if err == domain.PersonNotFound {
 			c.AbortWithStatusJSON(404, err)
 			return
 		}
@@ -36,6 +50,17 @@ func (h *HTTPHandler) Get(c *gin.Context) {
 }
 
 // GetAll returns all members
+// @title Family Tree API
+// @description this list people inside service
+// @version 1.0.0
+// @BasePath /
+// @schemes http
+// @host localhost:8080
+// @name Family Tree API
+// @produces application/json
+// @consumes application/json
+// @Router /people [get]
+// @Success 200 {object} []domain.Person
 func (h *HTTPHandler) GetAll(c *gin.Context) {
 	members, err := h.personService.GetAllMembers(h.ctx)
 	if err != nil {

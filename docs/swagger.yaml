@@ -1,0 +1,52 @@
+definitions:
+  domain.Family:
+    properties:
+      members:
+        items:
+          $ref: '#/definitions/domain.Person'
+        type: array
+    type: object
+  domain.Person:
+    properties:
+      name:
+        type: string
+      relationships:
+        items:
+          $ref: '#/definitions/domain.Relationship'
+        type: array
+    type: object
+  domain.Relationship:
+    properties:
+      name:
+        type: string
+      relationship:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /pearson/{name}:
+    get:
+      description: List all ancestors of a family member
+      parameters:
+      - description: Name of the person like 'Bruce'
+        in: path
+        name: name
+        required: true
+        type: string
+      responses:
+        "200":
+          description: Family member and its ancestors
+          schema:
+            $ref: '#/definitions/domain.Family'
+  /people:
+    get:
+      description: this list people inside service
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Person'
+            type: array
+swagger: "2.0"

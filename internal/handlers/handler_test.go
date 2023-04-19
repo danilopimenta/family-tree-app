@@ -82,7 +82,7 @@ func TestHTTPHandler_Get(t *testing.T) {
 			},
 			statusError:       404,
 			serviceMockReturn: domain.Family{},
-			serviceMockErr:    domain.ErrUnknown,
+			serviceMockErr:    domain.PersonNotFound,
 		},
 		{
 			name: "should return 500 error",

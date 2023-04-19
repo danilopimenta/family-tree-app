@@ -115,7 +115,7 @@ func TestPersonService_GetMemberAncestor(t *testing.T) {
 			fields: fields{
 				repository: func() *ports.MockRepository {
 					mRepository := ports.NewMockRepository(t)
-					mRepository.EXPECT().FindByName("Danilo").Return(domain.Person{}, domain.ErrUnknown)
+					mRepository.EXPECT().FindByName("Danilo").Return(domain.Person{}, domain.PersonNotFound)
 					return mRepository
 				}(),
 			},
@@ -133,7 +133,7 @@ func TestPersonService_GetMemberAncestor(t *testing.T) {
 						Name:          "Danilo",
 						Relationships: []domain.Relationship{},
 					}, nil)
-					mRepository.EXPECT().FindAncestors("Danilo").Return([]domain.Person{}, domain.ErrUnknown)
+					mRepository.EXPECT().FindAncestors("Danilo").Return([]domain.Person{}, domain.PersonNotFound)
 					return mRepository
 				}(),
 			},

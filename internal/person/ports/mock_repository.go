@@ -21,7 +21,7 @@ func (_m *MockRepository) EXPECT() *MockRepository_Expecter {
 }
 
 // Find provides a mock function with given fields: _a0
-func (_m *MockRepository) Find(_a0 string) (*domain.Person, error) {
+func (_m *MockRepository) FindOne(_a0 string) (*domain.Person, error) {
 	ret := _m.Called(_a0)
 
 	var r0 *domain.Person
@@ -46,7 +46,7 @@ func (_m *MockRepository) Find(_a0 string) (*domain.Person, error) {
 	return r0, r1
 }
 
-// MockRepository_Find_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'Find'
+// MockRepository_Find_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'FindOne'
 type MockRepository_Find_Call struct {
 	*mock.Call
 }
@@ -54,7 +54,7 @@ type MockRepository_Find_Call struct {
 // Find is a helper method to define mock.On call
 //   - _a0 string
 func (_e *MockRepository_Expecter) Find(_a0 interface{}) *MockRepository_Find_Call {
-	return &MockRepository_Find_Call{Call: _e.mock.On("Find", _a0)}
+	return &MockRepository_Find_Call{Call: _e.mock.On("FindOne", _a0)}
 }
 
 func (_c *MockRepository_Find_Call) Run(run func(_a0 string)) *MockRepository_Find_Call {

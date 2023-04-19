@@ -1,0 +1,84 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/pearson/{name}": {
+            "get": {
+                "description": "List all ancestors of a family member",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name of the person like 'Bruce'",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Family member and its ancestors",
+                        "schema": {
+                            "$ref": "#/definitions/domain.Family"
+                        }
+                    }
+                }
+            }
+        },
+        "/people": {
+            "get": {
+                "description": "this list people inside service",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domain.Person"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domain.Family": {
+            "type": "object",
+            "properties": {
+                "members": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Person"
+                    }
+                }
+            }
+        },
+        "domain.Person": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "relationships": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domain.Relationship"
+                    }
+                }
+            }
+        },
+        "domain.Relationship": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "relationship": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
